@@ -10,7 +10,11 @@ import { QrService } from '../services/qr.service';
 })
 export class InicioPage implements OnInit {
   
+  fechaSeleccionadaA: string = '';
+  fechaSeleccionadaC: string = '';
+  fechaSeleccionadaM: string = '';
   result: string[] = [];
+
   constructor(public navCtrl : NavController,
     public alertController: AlertController,
     private readonly qrScannerService: QrService
@@ -19,9 +23,6 @@ export class InicioPage implements OnInit {
   ngOnInit() {
   }
 
-  
-
-  
   async salir(){
     const alert = await this.alertController.create({
       header: 'Salir',
@@ -45,75 +46,418 @@ export class InicioPage implements OnInit {
       ]
     });
     await alert.present();
-    //localStorage.removeItem('ingresado');
-    //this.navCtrl.navigateRoot('login');
     };
-
-
-  /*async mensaje(){const alert = await this.alertController.create({
-  header: 'No funcional',
-  message: 'Por el momento no se encuentra disponible esta opcion',
-  buttons: ['Aceptar'],
-});
-await alert.present();}*/
 
 name(){
   var usuarioN = localStorage.getItem('nombre');
   return usuarioN}
 
-//dejar solo scan basico ver si despues puedo hacer condicional
-/*async scan(): Promise<void> {
-  const result = await CapacitorBarcodeScanner.scanBarcode({
-    hint: CapacitorBarcodeScannerTypeHint.ALL
-  });
-  this.result = result.ScanResult;
-  }*/
+
+  //inicio scan arquitectura
+  onFechaSeleccionadaA(event: any) {
+    this.fechaSeleccionadaA = event.detail.value; // Captura el valor seleccionado
+    console.log('Fecha seleccionada:', this.fechaSeleccionadaA);
+      }
 
   async scanA(): Promise<void> {
-    var usuarioa = localStorage.getItem('nombre')
-    if (usuarioa !== null) {var usuarioA = usuarioa}
+    let usuarioa = localStorage.getItem('nombre')
+    let fecha4 = ''
+    let fecha11 = ''
+    let fecha18 = ''
+    let fecha25 = ''
     //const result = await this.qrScannerService.scan()
+  if(this.fechaSeleccionadaA == '04') {
+
     try {
       this.result = await this.qrScannerService.scan();
       console.log('Códigos escaneados:', this.result);
-      if (this.result.includes("Arquitectura|003D|L3|11-11-2024") && usuarioa !== null)
-        {this.result, usuarioA= usuarioa, localStorage.setItem('nombreA',usuarioA)}
-      else {this.result= ['Asignatura no valida']}
+      if (this.result.includes("ASY4131|003D|L3|20241104") && usuarioa !== null)
+        {this.result, fecha4 = usuarioa, localStorage.setItem('fe4',fecha4) }
+          //if (usuarioa !== null) { localStorage.setItem('nombreA',usuarioa)}}//arreglar tema de nombre estudiante
+      
+      else if(
+        this.result.includes("CSY4111|004D|L6|20241106") 
+      || this.result.includes("CSY4111|004D|L6|20241113")
+      || this.result.includes("CSY4111|004D|L6|20241120")
+      || this.result.includes("CSY4111|004D|L6|20241127")
+    )
+      {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+    else if(
+      this.result.includes("PGY4121|005D|L10|20241108")
+    ||this.result.includes("PGY4121|005D|L10|20241115")
+    ||this.result.includes("PGY4121|005D|L10|20241122")
+    ||this.result.includes("PGY4121|005D|L10|20241129")
+    )
+    {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+      else {this.result= ['Fecha no Valida, por favor escane la fecha correspondiente a 04/11/24']}
     } catch (error) {
       console.error('Error al escanear código:', error);
     }
-    //trabajar esta wea del resultao
-    //this.result = result.ScanResult;
   }
+
+else if (this.fechaSeleccionadaA == '11'){
+
+  try {
+    this.result = await this.qrScannerService.scan();
+    console.log('Códigos escaneados:', this.result);
+    if (this.result.includes("ASY4131|003D|L3|20241111") && usuarioa !== null)
+      {this.result, fecha11 = usuarioa, localStorage.setItem('fe11',fecha11)}//arreglar tema de nombre estudiante
+    
+    else if(
+      this.result.includes("CSY4111|004D|L6|20241106") 
+    || this.result.includes("CSY4111|004D|L6|20241113")
+    || this.result.includes("CSY4111|004D|L6|20241120")
+    || this.result.includes("CSY4111|004D|L6|20241127")
+  )
+    {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+  else if(
+    this.result.includes("PGY4121|005D|L10|20241108")
+  ||this.result.includes("PGY4121|005D|L10|20241115")
+  ||this.result.includes("PGY4121|005D|L10|20241122")
+  ||this.result.includes("PGY4121|005D|L10|20241129")
+  )
+  {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+    
+    else {this.result= ['Fecha no Valida, por favor escane la fecha correspondiente a 11/11/24']}
+  } catch (error) {
+    console.error('Error al escanear código:', error);
+  }
+}
+
+else if (this.fechaSeleccionadaA == '18'){
+
+  try {
+    this.result = await this.qrScannerService.scan();
+    console.log('Códigos escaneados:', this.result);
+    if (this.result.includes("ASY4131|003D|L3|20241118") && usuarioa !== null)
+      {this.result, fecha18 = usuarioa, localStorage.setItem('fe18',fecha18)}//arreglar tema de nombre estudiante
+    
+    else if(
+      this.result.includes("CSY4111|004D|L6|20241106") 
+    || this.result.includes("CSY4111|004D|L6|20241113")
+    || this.result.includes("CSY4111|004D|L6|20241120")
+    || this.result.includes("CSY4111|004D|L6|20241127")
+  )
+    {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+  else if(
+    this.result.includes("PGY4121|005D|L10|20241108")
+  ||this.result.includes("PGY4121|005D|L10|20241115")
+  ||this.result.includes("PGY4121|005D|L10|20241122")
+  ||this.result.includes("PGY4121|005D|L10|20241129")
+  )
+  {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+    else {this.result= ['Fecha no Valida, por favor escane la fecha correspondiente a 18/11/24']}
+  } catch (error) {
+    console.error('Error al escanear código:', error);
+  }
+}
+
+else if (this.fechaSeleccionadaA == '25'){
+
+  try {
+    this.result = await this.qrScannerService.scan();
+    console.log('Códigos escaneados:', this.result);
+    if (this.result.includes("ASY4131|003D|L3|20241125") && usuarioa !== null)
+      {this.result, fecha25 = usuarioa, localStorage.setItem('fe25',fecha25)}//en vola puedo poner un else if pa comprobar asignatura equivocada equivocada 
+    
+    else if(
+      this.result.includes("CSY4111|004D|L6|20241106") 
+    || this.result.includes("CSY4111|004D|L6|20241113")
+    || this.result.includes("CSY4111|004D|L6|20241120")
+    || this.result.includes("CSY4111|004D|L6|20241127")
+  )
+    {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+  else if(
+    this.result.includes("PGY4121|005D|L10|20241108")
+  ||this.result.includes("PGY4121|005D|L10|20241115")
+  ||this.result.includes("PGY4121|005D|L10|20241122")
+  ||this.result.includes("PGY4121|005D|L10|20241129")
+  )
+  {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+    
+    else {this.result= ['Fecha no Valida, por favor escane la fecha correspondiente a 25/11/24']}
+  } catch (error) {
+    console.error('Error al escanear código:', error);
+  }
+}
+
+  else{console.log('fecha invalida')}
+}
+//fin scan arquitectura-----
+
+//inicio scan Calidad
+onFechaSeleccionadaC(event: any) {
+  this.fechaSeleccionadaC = event.detail.value; 
+  console.log('Fecha seleccionada:', this.fechaSeleccionadaC);
+    }
 
   async scanC(): Promise<void> {
-    var usuarioc = localStorage.getItem('nombre')
-    if (usuarioc !== null) {var usuarioC = usuarioc}
+    let usuarioa = localStorage.getItem('nombre')
+    let fecha6 = ''
+    let fecha13 = ''
+    let fecha20 = ''
+    let fecha27 = ''
+
+    if(this.fechaSeleccionadaC == '06'){
     try {
       this.result = await this.qrScannerService.scan();
       console.log('Códigos escaneados:', this.result);
-      if (this.result.includes("Calidad Software|00124D|L6|11-11-20") && usuarioc !== null)
-        {this.result, usuarioC= usuarioc, localStorage.setItem('nombreC',usuarioC)}
-      else {this.result= ['Asignatura no valida']}
+
+      if (this.result.includes("CSY4111|004D|L6|20241106") && usuarioa !== null)
+        {this.result, fecha6 = usuarioa, localStorage.setItem('fe6',fecha6) }
+
+      else if(
+          this.result.includes("ASY4131|003D|L3|20241104") 
+        || this.result.includes("ASY4131|003D|L3|20241111")
+        || this.result.includes("ASY4131|003D|L3|20241118")
+        || this.result.includes("ASY4131|003D|L3|20241125")
+      )
+        {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+      else if(
+        this.result.includes("PGY4121|005D|L10|20241108")
+      ||this.result.includes("PGY4121|005D|L10|20241115")
+      ||this.result.includes("PGY4121|005D|L10|20241122")
+      ||this.result.includes("PGY4121|005D|L10|20241129")
+      )
+      {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+      else {this.result= ['Fecha no Valida, por favor escane la fecha correspondiente a 06/11/24']}
     } catch (error) {
       console.error('Error al escanear código:', error);
     }
   }
 
+  else if (this.fechaSeleccionadaC == '13'){
+    try {
+      this.result = await this.qrScannerService.scan();
+      console.log('Códigos escaneados:', this.result);
+      if (this.result.includes("CSY4111|004D|L6|20241113") && usuarioa !== null)
+        {this.result, fecha13 = usuarioa, localStorage.setItem('fe13',fecha13) }
+
+
+      else if(
+        this.result.includes("ASY4131|003D|L3|20241104") 
+      || this.result.includes("ASY4131|003D|L3|20241111")
+      || this.result.includes("ASY4131|003D|L3|20241118")
+      || this.result.includes("ASY4131|003D|L3|20241125")
+    )
+      {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+    else if(
+      this.result.includes("PGY4121|005D|L10|20241108")
+    ||this.result.includes("PGY4121|005D|L10|20241115")
+    ||this.result.includes("PGY4121|005D|L10|20241122")
+    ||this.result.includes("PGY4121|005D|L10|20241129")
+    )
+    {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+      else {this.result= ['Fecha no Valida, por favor escane la fecha correspondiente a 13/11/24']}
+    } catch (error) {
+      console.error('Error al escanear código:', error);
+    }
+  }
+
+  else if (this.fechaSeleccionadaC == '20'){
+    try {
+      this.result = await this.qrScannerService.scan();
+      console.log('Códigos escaneados:', this.result);
+      if (this.result.includes("CSY4111|004D|L6|20241120") && usuarioa !== null)
+        {this.result, fecha20 = usuarioa, localStorage.setItem('fe20',fecha20) }
+
+      else if(
+        this.result.includes("ASY4131|003D|L3|20241104") 
+      || this.result.includes("ASY4131|003D|L3|20241111")
+      || this.result.includes("ASY4131|003D|L3|20241118")
+      || this.result.includes("ASY4131|003D|L3|20241125")
+    )
+      {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+    else if(
+      this.result.includes("PGY4121|005D|L10|20241108")
+    ||this.result.includes("PGY4121|005D|L10|20241115")
+    ||this.result.includes("PGY4121|005D|L10|20241122")
+    ||this.result.includes("PGY4121|005D|L10|20241129")
+    )
+    {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+      else {this.result= ['Fecha no Valida, por favor escane la fecha correspondiente a 20/11/24']}
+    } catch (error) {
+      console.error('Error al escanear código:', error);
+    }
+  }
+
+  else if (this.fechaSeleccionadaC == '27'){
+    try {
+      this.result = await this.qrScannerService.scan();
+      console.log('Códigos escaneados:', this.result);
+      if (this.result.includes("CSY4111|004D|L6|20241127") && usuarioa !== null)
+        {this.result, fecha27 = usuarioa, localStorage.setItem('fe27',fecha27) }
+
+      else if(
+        this.result.includes("ASY4131|003D|L3|20241104") 
+      || this.result.includes("ASY4131|003D|L3|20241111")
+      || this.result.includes("ASY4131|003D|L3|20241118")
+      || this.result.includes("ASY4131|003D|L3|20241125")
+    )
+      {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+    else if(
+      this.result.includes("PGY4121|005D|L10|20241108")
+    ||this.result.includes("PGY4121|005D|L10|20241115")
+    ||this.result.includes("PGY4121|005D|L10|20241122")
+    ||this.result.includes("PGY4121|005D|L10|20241129")
+    )
+    {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+      else {this.result= ['Fecha no Valida, por favor escane la fecha correspondiente a 27/11/24']}
+    } catch (error) {
+      console.error('Error al escanear código:', error);
+    }
+  }
+
+  else{console.log('fecha invalida')}
+  }
+//fin scan calidad----
+
+
+//inicio scan de movil
+onFechaSeleccionadaM(event: any) {
+  this.fechaSeleccionadaM = event.detail.value; 
+  console.log('Fecha seleccionada:', this.fechaSeleccionadaM);
+    }
 
   async scanP(): Promise<void> {
-    var usuarioo = localStorage.getItem('nombre')
-    if (usuarioo !== null) {var usuarioO = usuarioo}
+    let usuarioa = localStorage.getItem('nombre')
+    let fecha8 = ''
+    let fecha15 = ''
+    let fecha22 = ''
+    let fecha29 = ''
+
+    if(this.fechaSeleccionadaM == '08'){
     try {
       this.result = await this.qrScannerService.scan();
       console.log('Códigos escaneados:', this.result);
-      if (this.result.includes("Programacion Movil|005D|L10|11-11-2024") && usuarioo !== null)
-        {this.result,usuarioO= usuarioo, localStorage.setItem('nombreO',usuarioO) }
-      else {this.result= ['Asignatura no valida']}
+      if (this.result.includes("PGY4121|005D|L10|20241108") && usuarioa !== null)
+        {this.result, fecha8 = usuarioa, localStorage.setItem('fe8',fecha8) }
+
+      else if(
+        this.result.includes("ASY4131|003D|L3|20241104") 
+      || this.result.includes("ASY4131|003D|L3|20241111")
+      || this.result.includes("ASY4131|003D|L3|20241118")
+      || this.result.includes("ASY4131|003D|L3|20241125")
+    )
+      {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+    else if(
+      this.result.includes("CSY4111|004D|L6|20241106") 
+      || this.result.includes("CSY4111|004D|L6|20241113")
+      || this.result.includes("CSY4111|004D|L6|20241120")
+      || this.result.includes("CSY4111|004D|L6|20241127")
+    )
+    {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+    else {this.result= ['Fecha no Valida, por favor escane la fecha correspondiente a 08/11/24']}
     } catch (error) {
       console.error('Error al escanear código:', error);
     }
   }
 
+  else if(this.fechaSeleccionadaM == '15'){
+    try {
+      this.result = await this.qrScannerService.scan();
+      console.log('Códigos escaneados:', this.result);
+      if (this.result.includes("PGY4121|005D|L10|20241115") && usuarioa !== null)
+        {this.result, fecha15 = usuarioa, localStorage.setItem('fe15',fecha15) }
+
+      else if(
+        this.result.includes("ASY4131|003D|L3|20241104") 
+      || this.result.includes("ASY4131|003D|L3|20241111")
+      || this.result.includes("ASY4131|003D|L3|20241118")
+      || this.result.includes("ASY4131|003D|L3|20241125")
+    )
+      {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+    else if(
+      this.result.includes("CSY4111|004D|L6|20241106") 
+      || this.result.includes("CSY4111|004D|L6|20241113")
+      || this.result.includes("CSY4111|004D|L6|20241120")
+      || this.result.includes("CSY4111|004D|L6|20241127")
+    )
+    {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+    else {this.result= ['Fecha no Valida, por favor escane la fecha correspondiente a 15/11/24']}
+    } catch (error) {
+      console.error('Error al escanear código:', error);
+    }
+  }
+
+  else if(this.fechaSeleccionadaM == '22'){
+    try {
+      this.result = await this.qrScannerService.scan();
+      console.log('Códigos escaneados:', this.result);
+      if (this.result.includes("PGY4121|005D|L10|20241122") && usuarioa !== null)
+        {this.result, fecha22 = usuarioa, localStorage.setItem('fe22',fecha22) }
+
+      else if(
+        this.result.includes("ASY4131|003D|L3|20241104") 
+      || this.result.includes("ASY4131|003D|L3|20241111")
+      || this.result.includes("ASY4131|003D|L3|20241118")
+      || this.result.includes("ASY4131|003D|L3|20241125")
+    )
+      {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+    else if(
+      this.result.includes("CSY4111|004D|L6|20241106") 
+      || this.result.includes("CSY4111|004D|L6|20241113")
+      || this.result.includes("CSY4111|004D|L6|20241120")
+      || this.result.includes("CSY4111|004D|L6|20241127")
+    )
+    {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+    else {this.result= ['Fecha no Valida, por favor escane la fecha correspondiente a 22/11/24']}
+    } catch (error) {
+      console.error('Error al escanear código:', error);
+    }
+  }
+
+
+  else if(this.fechaSeleccionadaM == '29'){
+    try {
+      this.result = await this.qrScannerService.scan();
+      console.log('Códigos escaneados:', this.result);
+      if (this.result.includes("PGY4121|005D|L10|20241129") && usuarioa !== null)
+        {this.result, fecha29 = usuarioa, localStorage.setItem('fe29',fecha29) }
+
+      else if(
+        this.result.includes("ASY4131|003D|L3|20241104") 
+      || this.result.includes("ASY4131|003D|L3|20241111")
+      || this.result.includes("ASY4131|003D|L3|20241118")
+      || this.result.includes("ASY4131|003D|L3|20241125")
+    )
+      {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+    else if(
+      this.result.includes("CSY4111|004D|L6|20241106") 
+      || this.result.includes("CSY4111|004D|L6|20241113")
+      || this.result.includes("CSY4111|004D|L6|20241120")
+      || this.result.includes("CSY4111|004D|L6|20241127")
+    )
+    {this.result = ['Asisgnatura incorrecta por ende su seccion, sala y horario seran incorrectos']}
+
+    else {this.result= ['Fecha no Valida, por favor escane la fecha correspondiente a 29/11/24']}
+    } catch (error) {
+      console.error('Error al escanear código:', error);
+    }
+  }
+
+  else{console.log('fecha invalida')}
+  }
+//fin scan movil
 
 }

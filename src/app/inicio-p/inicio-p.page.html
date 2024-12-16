@@ -31,9 +31,21 @@
         <img alt="Silhouette of mountains" src="/assets/img/istockphoto-1337844283-612x612.jpg"/>
         <ion-card-header>
           <ion-card-title>Arquitectura_003D</ion-card-title>
-          <ion-card-subtitle>2024_2_SJ4131</ion-card-subtitle>
+          <ion-card-subtitle>2024_2_SJ_ASY4131_24229156_PCT</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
+          <p>Porfavor seleccione fecha</p>
+          <ion-list>
+            <ion-item>
+              <p>Fecha asistencia</p>
+              <ion-select aria-label="asistencia" (ionChange)="onFechaSeleccionadaA($event)" value="">
+                <ion-select-option value="04">04/11/24</ion-select-option>
+                <ion-select-option value="11">11/11/24</ion-select-option>
+                <ion-select-option value="18">18/11/24</ion-select-option>
+                <ion-select-option value="25">25/11/24</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <ion-button (click)="mensajeA()">
             Mostrar QR Asignatura
           </ion-button> <br>
@@ -45,9 +57,21 @@
         <img alt="Silhouette of mountains" src="/assets/img/istockphoto-1444128859-612x612.jpg" />
         <ion-card-header>
           <ion-card-title>Calidad de Software_001D</ion-card-title>
-          <ion-card-subtitle>2024_2_CSY4123</ion-card-subtitle>
+          <ion-card-subtitle>2024_2_SJ_CSY4111_24229166_PCT</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
+          <p>Porfavor seleccione fecha</p>
+          <ion-list>
+            <ion-item>
+              <p>Fecha asistencia</p>
+              <ion-select aria-label="asistencia" (ionChange)="onFechaSeleccionadaC($event)" value="">
+                <ion-select-option value="06">06/11/24</ion-select-option>
+                <ion-select-option value="13">13/11/24</ion-select-option>
+                <ion-select-option value="20">20/11/24</ion-select-option>
+                <ion-select-option value="27">27/11/24</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <ion-button (click)="mensajeC()">
             Mostrar QR Asignatura
           </ion-button> <br>
@@ -59,9 +83,21 @@
         <img alt="Silhouette of mountains" src="/assets/img/istockphoto-1386341272-612x612.jpg"/>
         <ion-card-header>
           <ion-card-title>Programacion de Aplicaciones Moviles_005D</ion-card-title>
-          <ion-card-subtitle>2024_2_CSY4312</ion-card-subtitle>
+          <ion-card-subtitle>2024_2_SJ_PGY4121_24229158_PCT</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
+          <p>Porfavor seleccione fecha</p>
+          <ion-list>
+            <ion-item>
+              <p>Fecha asistencia</p>
+              <ion-select aria-label="asistencia" (ionChange)="onFechaSeleccionadaM($event)" value="">
+                <ion-select-option value="08">08/11/24</ion-select-option>
+                <ion-select-option value="15">15/11/24</ion-select-option>
+                <ion-select-option value="22">22/11/24</ion-select-option>
+                <ion-select-option value="29">29/11/24</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <ion-button (click)="mensajeP()">
             Mostrar QR Asignatura
           </ion-button> <br>
@@ -71,5 +107,7 @@
     </ion-item>
     </ion-content>
   </div>
+
+  
 </ion-content>
 
